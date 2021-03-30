@@ -1,3 +1,31 @@
+//Add advantage name to selected advantages container and add ID.
+let selectedAdvantageArray = [];
+
+function addToSelectedArray(objectName) {
+    selectedAdvantageArray.push(objectName.title);    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //............A
 let absoluteDirection = {
     title: "Absolute Direction",
