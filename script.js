@@ -5,7 +5,18 @@ function addToSelectedArray(objectName) {
     selectedAdvantageArray.push(objectName.title);    
 }
 
+function displaySelected() {
+    const createSelectedAdvantageDiv = document.createElement('div');
+    const placeSelectedText = document.getElementById('selected-advantages-text');
 
+    selectedAdvantageArray.forEach(function(entry) { 
+    placeSelectedText.appendChild(createSelectedAdvantageDiv);
+    createSelectedAdvantageDiv.setAttribute("class", 'selected-advantages');
+    createSelectedAdvantageDiv.setAttribute("id", `selected-advantage-${entry}`);
+    createSelectedAdvantageDiv.innerHTML = entry;
+    console.log(entry);
+    })   
+}
 
 
 
