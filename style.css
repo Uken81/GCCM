@@ -30,3 +30,7 @@
   .forms {
     margin-left: 2rem;
   }
+
+  button {
+      background-color: red;
+  }
