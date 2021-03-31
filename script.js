@@ -2,7 +2,8 @@
 let selectedAdvantageArray = [];
 
 function addToSelectedArray(objectName) {
-    selectedAdvantageArray.push(objectName.title);    
+    selectedAdvantageArray.push(objectName.title); 
+    console.log(selectedAdvantageArray);   
 }
 
 function displaySelected() {
@@ -18,9 +19,24 @@ function displaySelected() {
     })   
 }
 
+function addToSelectedWindow(objectName) {
+    addToSelectedArray(objectName);
+    displaySelected();
+}
 
+//AAAAAAAAAAAAAAAA
+document.getElementById("submit-advantage-a").addEventListener("click", function (e) {
+    e.preventDefault();
+    const userAdvantageA = document.getElementById('user-advantages-a').value;
 
-
+    if (userAdvantageA === 'absolute direction') {
+        console.log(selectedAdvantageArray);
+    } else if (userAdvantageA === 'absolute timing') {
+        console.log(selectedAdvantageArray);
+    } else if (userAdvantageA === 'acute senses') {
+        console.log(selectedAdvantageArray);
+    }
+});
 
 
 
