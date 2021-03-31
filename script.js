@@ -2,10 +2,8 @@
 function disableSelectedOption(objectName) {
     let selectedOption;
     let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
-    console.log(nameInHtml);
     selectedOption = document.getElementById(`option-${nameInHtml}`);
     selectedOption.setAttribute('disabled', true);
-    console.log(selectedOption);
 }
 
 //Add advantage name to selected advantages array/container and assign ID and class.
@@ -19,13 +17,14 @@ function addToSelectedArray(objectName) {
         console.log('duplicate selected');
     } else {
         selectedAdvantageArray.push(objectName.title);
+        console.log(selectedAdvantageArray);
     }
 }
 
 function displaySelected() {
     const createSelectedAdvantageDiv = document.createElement('div');
     const placeSelectedText = document.getElementById('selected-advantages-text');
-    
+
     selectedAdvantageArray.forEach(function (entry) {
         let nameInHtml = entry.split(" ").join("-").toLowerCase();
         placeSelectedText.appendChild(createSelectedAdvantageDiv);
@@ -48,10 +47,11 @@ function addDeleteButton(objectName) {
 
 function removeAdvantageText(objectName) {
     let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
-    // let advantageDescriptionToRemove = document.getElementById(`container-${removeThis}`);
     let selectedAdvantageToRemove = document.getElementById(`selected-advantage-${nameInHtml}`);
-    // advantageDescriptionToRemove.remove();
+    let advantageDescriptionToRemove = document.getElementById(`container-${nameInHtml}`);
+    
     selectedAdvantageToRemove.remove();
+    advantageDescriptionToRemove.remove();
     console.log(selectedAdvantageToRemove);
 }
 
@@ -79,9 +79,7 @@ function removeAdvantage(objectName) {
     document.getElementById(`delete-${nameInHtml}`).addEventListener("click", function () {
         removeAdvantageText(objectName);
         reenableSelection(objectName);
-
-        selectedOption = document.getElementById(`option-absolute-direction`);
-        console.log(selectedOption);
+        removeFromArray(objectName);
     })
 };
 
@@ -93,9 +91,58 @@ function addToSelectedWindow(objectName) {
         disableSelectedOption(objectName);
         addDeleteButton(objectName);
         removeAdvantage(objectName);
-        removeFromArray(objectName);
+        // removeFromArray(objectName);
     }
-    //Resets variable value to allow other advantages to be selected.
+}
+
+//Creates containers for the advantage descriptions in the display choice section at bottom of page.
+function createContainer(objectName) {
+    let createDivElement = document.createElement('div');
+    let placeAdvantageDescription = document.getElementById('place-advantage-text');
+    let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+    placeAdvantageDescription.appendChild(createDivElement);
+    createDivElement.setAttribute("id", `container-${nameInHtml}`);
+    }
+
+//Creates and adds the text for the selected advantages title, points and description.
+//Creates and adds the text for the selected advantages title, points and description in place-advantage-text.
+function addAdvantageTitle(objectName) {
+    const createTitleElement = document.createElement('p');
+    let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+    let titleToAdd = document.getElementById(`container-${nameInHtml}`);
+    titleToAdd.append(createTitleElement);
+    createTitleElement.classList.add("title");
+    createTitleElement.innerText = objectName.title;
+}
+
+function addAdvantagePoints(objectName) {
+    const createPointsElement = document.createElement('p');
+    let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+    let titleToAdd = document.getElementById(`container-${nameInHtml}`);
+    titleToAdd.append(createPointsElement);
+    createPointsElement.classList.add("points");
+    createPointsElement.innerText = objectName.points;
+}
+
+function addAdvantageDescription(objectName) {
+    const createDescriptionElement = document.createElement('p');
+    let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+    let descriptionToAdd = document.getElementById(`container-${nameInHtml}`);
+    descriptionToAdd.append(createDescriptionElement);
+    createDescriptionElement.classList.add("description");
+    createDescriptionElement.innerText = objectName.description;
+}
+
+
+
+function addToDescriptionWindow(objectName) {
+    if (isDuplicate === false) {
+    createContainer(objectName);
+    addAdvantageTitle(objectName);
+    addAdvantagePoints(objectName);
+    addAdvantageDescription(objectName);
+    }
+//Resets variable value to allow other advantages to be selected.
     isDuplicate = false;
 }
 
@@ -108,12 +155,18 @@ document.getElementById("submit-advantage-a").addEventListener("click", function
 
     if (userAdvantageA === 'absolute direction') {
         addToSelectedWindow(absoluteDirection);
+        addToDescriptionWindow(absoluteDirection);
+        
         console.log(selectedAdvantageArray);
     } else if (userAdvantageA === 'absolute timing') {
         addToSelectedWindow(absoluteTiming);
+        addToDescriptionWindow(absoluteTiming);
+
         console.log(selectedAdvantageArray);
     } else if (userAdvantageA === 'acute senses') {
         addToSelectedWindow(acuteSenses);
+        addToDescriptionWindow(acuteSenses);
+
         console.log(selectedAdvantageArray);
     }
 });
