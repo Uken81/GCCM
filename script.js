@@ -1,28 +1,54 @@
-//Add advantage name to selected advantages container and add ID.
+//greys out form options when they are selected.
+function disableSelectedOption(objectName) {
+    let selectedOption;
+    let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+    console.log(nameInHtml);  
+    selectedOption = document.getElementById(`option-${nameInHtml}`);
+    selectedOption.setAttribute('disabled', true);
+    console.log(selectedOption);
+}
+
+//Add advantage name to selected advantages array/container and assign ID and class.
 let selectedAdvantageArray = [];
+let isDuplicate = false;
 
 function addToSelectedArray(objectName) {
-    selectedAdvantageArray.push(objectName.title); 
-    console.log(selectedAdvantageArray);   
+    if (selectedAdvantageArray.includes(objectName.title)) {
+        isDuplicate = true;
+        window.alert("You have already selected this advantage");
+        console.log('duplicate selected');
+    } else {
+        selectedAdvantageArray.push(objectName.title);      
+    }   
 }
 
 function displaySelected() {
     const createSelectedAdvantageDiv = document.createElement('div');
     const placeSelectedText = document.getElementById('selected-advantages-text');
+     
 
     selectedAdvantageArray.forEach(function(entry) { 
+    let nameInHtml = entry.split(" ").join("-").toLowerCase();
     placeSelectedText.appendChild(createSelectedAdvantageDiv);
     createSelectedAdvantageDiv.setAttribute("class", 'selected-advantages');
-    createSelectedAdvantageDiv.setAttribute("id", `selected-advantage-${entry}`);
+    createSelectedAdvantageDiv.setAttribute("id", `selected-advantage-${nameInHtml}`);
     createSelectedAdvantageDiv.innerHTML = entry;
     console.log(entry);
     })   
 }
 
+//Displays selected advantage titles in selection window.
 function addToSelectedWindow(objectName) {
     addToSelectedArray(objectName);
-    displaySelected();
+    if (isDuplicate === false) {
+        displaySelected();
+        disableSelectedOption(objectName);
+    }
+//Resets variable value to allow other advantages to be selected.
+    isDuplicate = false;    
 }
+
+//Event listeners for user advantages selection.
 
 //AAAAAAAAAAAAAAAA
 document.getElementById("submit-advantage-a").addEventListener("click", function (e) {
@@ -30,10 +56,13 @@ document.getElementById("submit-advantage-a").addEventListener("click", function
     const userAdvantageA = document.getElementById('user-advantages-a').value;
 
     if (userAdvantageA === 'absolute direction') {
+        addToSelectedWindow(absoluteDirection);
         console.log(selectedAdvantageArray);
     } else if (userAdvantageA === 'absolute timing') {
+        addToSelectedWindow(absoluteTiming);
         console.log(selectedAdvantageArray);
     } else if (userAdvantageA === 'acute senses') {
+        addToSelectedWindow(acuteSenses);
         console.log(selectedAdvantageArray);
     }
 });
@@ -71,7 +100,7 @@ let absoluteDirection = {
   }
   
   let absoluteTiming = {
-    title: "AbsoluteTiming",
+    title: "Absolute Timing",
     points: "2 or 5 points",
     description: "You have an accurate mental clock. This ability comes in two levels, both of which are somewhat cinematic:",
     subCategory1: {
