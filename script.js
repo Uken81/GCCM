@@ -104,7 +104,6 @@ function createContainer(objectName) {
     createDivElement.setAttribute("id", `container-${nameInHtml}`);
 }
 
-//Creates and adds the text for the selected advantages title, points and description.
 //Creates and adds the text for the selected advantages title, points and description in place-advantage-text.
 function addAdvantageTitle(objectName) {
     const createTitleElement = document.createElement('p');
@@ -134,46 +133,38 @@ function addAdvantageDescription(objectName) {
 }
 
 function addAdvantantageSubCategories(objectName) {
-    const subCategoriesArray = objectName.subCategories;
-    // const createSubCategoryElement = document.createElement('p');
-    // let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
-    // let subCategoryToAdd = document.getElementById(`container-${nameInHtml}`);
-    subCategoriesArray.forEach(function (entry) {
-        let name = entry.name;
-        let description = entry.text;
-        let points = entry.points;
-        const createSubCategoryElement = document.createElement('p');
-        let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
-        let subCategoryToAdd = document.getElementById(`container-${nameInHtml}`);
-        
+    if (objectName.subCategories) {
+        const subCategoriesArray = objectName.subCategories;
+        subCategoriesArray.forEach(function (entry) {
+            let name = entry.name;
+            let description = entry.text;
+            let points = entry.points;
+            const createSubCategoryElement = document.createElement('p');
+            let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+            let subCategoryToAdd = document.getElementById(`container-${nameInHtml}`);
 
-        
-        subCategoryToAdd.append(createSubCategoryElement);
-        createSubCategoryElement.classList.add("subCategories");
-        createSubCategoryElement.setAttribute("id", `subCategory-${name}`);
+            subCategoryToAdd.append(createSubCategoryElement);
+            createSubCategoryElement.classList.add("subCategories");
+            createSubCategoryElement.setAttribute("id", `subCategory-${name}`);
 
-        let sub = document.getElementById(`subCategory-${name}`);
-        sub.innerHTML = `<strong>${name}</strong> <br><br>${description}<br><br><strong>${points}</strong> `;
-        console.log(subCategoriesArray);
-    })
+            let sub = document.getElementById(`subCategory-${name}`);
+            sub.innerHTML = `<strong>${name}</strong> <br><br>${description}<br><br><strong>${points}</strong> `;
+            console.log(subCategoriesArray);
+        })
+    }
 }
 
-// function addAdvantageSubCategories(objectName) {
-//     const createSubCategoryElement = document.createElement('p');
-//     let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
-//     let SubCategoryToAdd = document.getElementById(`container-${nameInHtml}`);
+function addExtraText(objectName) {
+    if (objectName.extraText) {
+        const createExtraTextElement = document.createElement('p');
+        let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
+        let extraTextToAdd = document.getElementById(`container-${nameInHtml}`);
 
-//     if (objectName.subCategories) {
-//         console.log('yeahboi!');
-//         let y = Object.values(objectName.subCategories);
-//         console.log(y);
-
-//         SubCategoryToAdd.append(createSubCategoryElement);
-//         createSubCategoryElement.innerHTML = y.values;
-//     }
-// }
-
-
+        extraTextToAdd.append(createExtraTextElement);
+        createExtraTextElement.classList.add("extra-text");
+        createExtraTextElement.innerHTML = objectName.extraText;
+    }
+}
 
 function addToDescriptionWindow(objectName) {
     if (isDuplicate === false) {
@@ -182,6 +173,7 @@ function addToDescriptionWindow(objectName) {
         addAdvantagePoints(objectName);
         addAdvantageDescription(objectName);
         addAdvantantageSubCategories(objectName);
+        addExtraText(objectName);
     }
     //Resets variable value to allow other advantages to be selected.
     isDuplicate = false;
@@ -281,12 +273,3 @@ let acuteSenses = {
     }],
     extraText: "With the GM’s permission, you may also buy Acute Sense advantages for specialized senses such as Scanning Sense and Vibration Sense. You cannot usually buy Acute Senses in play – raise your Perception instead. However, if you lose a sense, the GM may allow you to spend earned points on other Acute Senses to compensate. For instance, if you are blinded, you might acquire Acute Hearing."
 }
-
-// let acuteSenses = {
-//     title: "Acute Senses",
-//     points: "2 points/level",
-//     description: "You have superior senses. Each Acute Sense is a separate advantage that gives +1 per level to all Sense rolls (p. 358) you make – or the GM makes for you – using that one sense. Acute Hearing gives you a bonus to hear something, or to notice a sound (for instance, someone taking the safety off a gun in the dark).",
-  
-//     extraText: "With the GM’s permission, you may also buy Acute Sense advantages for specialized senses such as Scanning Sense and Vibration Sense. You cannot usually buy Acute Senses in play – raise your Perception instead. However, if you lose a sense, the GM may allow you to spend earned points on other Acute Senses to compensate. For instance, if you are blinded, you might acquire Acute Hearing."
-
-// }
