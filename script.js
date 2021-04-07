@@ -91,7 +91,6 @@ function addToSelectedWindow(objectName) {
         disableSelectedOption(objectName);
         addDeleteButton(objectName);
         removeAdvantage(objectName);
-        // removeFromArray(objectName);
     }
 }
 
@@ -101,6 +100,7 @@ function createContainer(objectName) {
     let placeAdvantageDescription = document.getElementById('place-advantage-text');
     let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
     placeAdvantageDescription.appendChild(createDivElement);
+    createDivElement.classList.add("description-containers");
     createDivElement.setAttribute("id", `container-${nameInHtml}`);
 }
 
@@ -177,6 +177,31 @@ function addToDescriptionWindow(objectName) {
     }
     //Resets variable value to allow other advantages to be selected.
     isDuplicate = false;
+}
+
+function copyToClipboard() {
+    let sectionToCopy = document.getElementById("items-to-copy");
+    let currentRange;
+
+    if (document.getSelection().rangeCount > 0) {
+        currentRange = document.getSelection().getRangeAt(0);
+        //remove the current selection
+        window.getSelection().removeRange(currentRange);
+    } else {
+        currentRange = false;
+    }
+
+    let copyRange = document.createRange();
+    copyRange.selectNode(sectionToCopy);
+    window.getSelection().addRange(copyRange);
+    document.execCommand("copy");
+
+    window.getSelection().removeRange(copyRange);
+
+    if (currentRange) {
+        window.getSelection().addRange(currentRange);
+    }
+    window.alert("Advantages are copied to your clipboard. You can now paste in your prefered text editor");
 }
 
 //Event listeners for user advantages selection.

@@ -3,12 +3,6 @@
     padding: 1rem 2rem;
   }
   
-  .title {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-align: center;
-  }
-  
   .points {
     font-weight: bold;
   }
@@ -19,7 +13,7 @@
     color: white;
     text-align: center;
     width: 20rem;
-    margin-right: 4rem;
+    margin-right: 8rem;
   }
 
   .selected-advantages {
@@ -33,4 +27,27 @@
 
   button {
       background-color: red;
+  }
+
+  #display-heading {
+    font-size: 3rem;
+    font-weight: bolder;
+    text-align: center;
+    color: blue;
+  }
+
+  /* .advantages {
+    margin: 2% 5% 0% 5%;
+  } */
+
+  .description-containers {
+margin: 0% 20% 5% 20%;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-align: center;
+    color: crimson;
+    margin-bottom: 5%;
   }
