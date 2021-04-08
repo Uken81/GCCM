@@ -6,6 +6,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <script type="text/javascript" src="/script.js" async></script>
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
   <title>GCRC</title>
 </head>
 
@@ -60,6 +63,7 @@
   <hr>
   <div class="toolbar">
     <button id="copy" onclick="copyToClipboard()">Copy To Clipboard</button>
+    <button id="pdf" onclick="getPDF()">Create PDF</button>
   </div>
   <hr>
   <div class="display-choice" id="items-to-copy">

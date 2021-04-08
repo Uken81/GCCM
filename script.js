@@ -104,7 +104,7 @@ function createContainer(objectName) {
     createDivElement.setAttribute("id", `container-${nameInHtml}`);
 }
 
-//Creates and adds the text for the selected advantages title, points and description in place-advantage-text.
+//Creates and adds the text for the selected advantages title, points, description ans sub-categories in place-advantage-text div.
 function addAdvantageTitle(objectName) {
     const createTitleElement = document.createElement('p');
     let nameInHtml = objectName.title.split(" ").join("-").toLowerCase();
@@ -148,7 +148,7 @@ function addAdvantantageSubCategories(objectName) {
             createSubCategoryElement.setAttribute("id", `subCategory-${name}`);
 
             let sub = document.getElementById(`subCategory-${name}`);
-            sub.innerHTML = `<i style="color: red; font-size: 1.25rem">${name}:</i><br>${description}<br><i>${points}.</i> `;
+            sub.innerHTML = `<i style="color: red; font-size: 1.5rem">${name}:</i><br>${description}<br><i>${points}.</i> `;
             console.log(subCategoriesArray);
         })
     }
@@ -179,6 +179,7 @@ function addToDescriptionWindow(objectName) {
     isDuplicate = false;
 }
 
+//Bottons for user to copy their selection to clipboard or download PDF.
 function copyToClipboard() {
     let sectionToCopy = document.getElementById("items-to-copy");
     let currentRange;
@@ -204,6 +205,60 @@ function copyToClipboard() {
     window.alert("Advantages are copied to your clipboard. You can now paste in your prefered text editor");
 }
 
+function getPDF(){
+    function getWidth() {
+        return Math.max(
+          document.body.scrollWidth,
+          document.documentElement.scrollWidth,
+          document.body.offsetWidth,
+          document.documentElement.offsetWidth,
+          document.documentElement.clientWidth
+        );
+      }
+
+      function getHeight() {
+        return Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.offsetHeight,
+          document.documentElement.clientHeight
+        );
+      }
+    const HTML_Width = getWidth();
+    const HTML_Height = getHeight();
+    console.log(HTML_Width);
+    console.log(HTML_Height);
+
+    const top_left_margin = 15;
+    const PDF_Width = HTML_Width+(top_left_margin*2);
+    const PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+    const canvas_image_width = HTML_Width;
+    const canvas_image_height = HTML_Height;
+    
+    const totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+    
+
+    html2canvas(document.querySelector("#items-to-copy")).then(function(canvas) {
+        canvas.getContext('2d');
+        
+        console.log(canvas.height+"  "+canvas.width);
+        
+        
+        const imgData = canvas.toDataURL("image/jpeg", 1.0);
+        const pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+        
+        
+        for (var i = 1; i <= totalPDFPages; i++) { 
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        
+        pdf.save("HTML-Document.pdf");
+    });
+};
+
 //Event listeners for user advantages selection.
 
 //AAAAAAAAAAAAAAAA
@@ -214,7 +269,7 @@ document.getElementById("submit-advantage-a").addEventListener("click", function
     if (userAdvantageA === 'absolute direction') {
         addToSelectedWindow(absoluteDirection);
         addToDescriptionWindow(absoluteDirection);
-
+        
         console.log(selectedAdvantageArray);
     } else if (userAdvantageA === 'absolute timing') {
         addToSelectedWindow(absoluteTiming);
