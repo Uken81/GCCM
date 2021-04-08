@@ -148,7 +148,7 @@ function addAdvantantageSubCategories(objectName) {
             createSubCategoryElement.setAttribute("id", `subCategory-${name}`);
 
             let sub = document.getElementById(`subCategory-${name}`);
-            sub.innerHTML = `<strong>${name}</strong> <br><br>${description}<br><br><strong>${points}</strong> `;
+            sub.innerHTML = `<i style="color: red; font-size: 1.25rem">${name}:</i><br>${description}<br><i>${points}.</i> `;
             console.log(subCategoriesArray);
         })
     }
@@ -285,7 +285,7 @@ let acuteSenses = {
     description: "You have superior senses. Each Acute Sense is a separate advantage that gives +1 per level to all Sense rolls (p. 358) you make – or the GM makes for you – using that one sense. Acute Hearing gives you a bonus to hear something, or to notice a sound (for instance, someone taking the safety off a gun in the dark).",
     subCategories: [{
         name: "Acute Taste and Smell",
-        text: "Gives you a bonus to notice a taste or smell (for instance, poison in your drink). 2 points/level.",
+        text: "Gives you a bonus to notice a taste or smell (for instance, poison in your drink).",
         points: "2 points/level"
     }, {
         name: "Acute Touch",

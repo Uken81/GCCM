@@ -3,10 +3,6 @@
     padding: 1rem 2rem;
   }
   
-  .points {
-    font-weight: bold;
-  }
-  
   #selected-advantages-container {
     float: right;
     background-color: gray;
@@ -30,10 +26,12 @@
   }
 
   #display-heading {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: bolder;
     text-align: center;
     color: blue;
+    margin-top: 1%;
+    margin-bottom: 0.5%;
   }
 
   /* .advantages {
@@ -41,7 +39,7 @@
   } */
 
   .description-containers {
-margin: 0% 20% 5% 20%;
+margin: 0% 20% 2% 20%;
   }
 
   .title {
@@ -49,5 +47,11 @@ margin: 0% 20% 5% 20%;
     font-weight: bolder;
     text-align: center;
     color: crimson;
-    margin-bottom: 5%;
+    margin: 1%;
+  }
+  
+  .points {
+    font-weight: bold;
+    text-align: center;
+    margin: 0%;
   }
